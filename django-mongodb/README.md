@@ -15,7 +15,7 @@ Follow the [tutorial](https://www.bezkoder.com/django-mongodb-crud-rest-framewor
 #### MongoDB set up
 Follow this [intructions](https://www.mongodb.com/docs/manual/tutorial/install-mongodb-on-os-x/#std-label-install-with-homebrew) according to your system.
 Note: Django 4.0+ has changed some features, be aware!
-- `Change `from django.conf.urls import url ` tp `from django.urls import re_path` in `urls.py`
+- Changefrom `django.conf.urls import url` to `from django.urls import re_path` in `urls.py`
 
 ```
 // MacOS example
@@ -27,7 +27,7 @@ brew services start mongodb-community@6.0
 // Connect and Use MongoDB
 mongotop
 ```
-#### Results.
+#### Implement Results.
 
 <table border="0">
  <tr>
