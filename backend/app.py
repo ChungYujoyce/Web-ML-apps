@@ -6,11 +6,10 @@ DB = db.DatabaseDriver()
 app = Flask(__name__)
 
 def success_response(data, code=200):
-    return json.dumps({"success": True, "data": data}), code
+    return json.dumps(data), code
 
 def failure_response(error, code=400):
-    return json.dumps({"success": False, "data": error}), code
-
+    return json.dumps(error), code
 
 
 @app.route("/")
@@ -18,7 +17,27 @@ def failure_response(error, code=400):
 def get_posts():
     #endpoint for getting data
     return success_response(DB.get_all_posts())
-    
+
+@app.route("/subposts/")
+def get_subposts():
+    return success_response(DB.get_all_subposts())
+
+@app.route("/posts/<int:post_id>/subposts/", methods=["POST"])
+def create_subposts(post_id):
+    body = json.loads(request.data)
+    content = body.get("content")
+
+    post = DB.get_post_by_id(post_id)
+    if not post:
+        return failure_response("post not found")
+
+    subpost_id = DB.insert_subposts(content, False, post_id)
+    subpost = DB.get_subpost_by_id(subpost_id)
+    return success_response(subpost, 201)
+
+@app.route("/posts/<int:post_id>/subposts/")
+def get_subposts_of_post(post_id):
+    return success_response({"subposts": DB.get_subposts_of_post(post_id)})
 
 @app.route("/posts/", methods=["POST"])
 def create_post():
