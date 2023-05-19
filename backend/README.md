@@ -17,6 +17,7 @@ Run `python app.py` for task 1 & 2.
 2. Relation Database: Add table with foreign key to reference other table.
 
 Run `python app_orm.py` for task 3.
+
 3. Abstractions (ORM): 
    - Query and manipulate data using Objects. 
    - Still preserve the database for SQL and storage benefits
